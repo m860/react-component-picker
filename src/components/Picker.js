@@ -1,15 +1,33 @@
 import React from "react";
 import BaseComponent from './BaseComponent'
 import PropTypes from 'prop-types'
+import triggerChange from 'react-trigger-change'
 
 export default class Picker extends BaseComponent {
+	static propTypes = {
+		pickerVisible: PropTypes.bool,
+		inputProps: PropTypes.object,
+		onMouseEnter: PropTypes.func,
+		onMouseLeave: PropTypes.func
+	};
+
+	static defaultProps = {
+		pickerVisible: false,
+		inputProps: {}
+	};
+
 	constructor(props) {
 		super(props);
 		this.state = {
-			showData: false,
 			width: null,
 			height: null
 		};
+	}
+
+	triggerChange(value) {
+		const {input} =this.refs;
+		input.value = value;
+		triggerChange(input)
 	}
 
 	render() {
@@ -21,23 +39,16 @@ export default class Picker extends BaseComponent {
 			pickerStyle.minHeight = this.state.height;
 		}
 		return (
-			<div className="picker" style={pickerStyle}>
-				<div className="picker-wrapper">
+			<div
+				onMouseLeave={this.props.onMouseLeave}
+				onMouseEnter={this.props.onMouseEnter}
+				className="picker"
+				style={pickerStyle}>
+				<div className="picker-wrapper" style={{zIndex:this.state.showData?999:'auto'}}>
 					<div className="picker-input">
-						<input
-							ref="input"
-							onBlur={event=>{
-								this.updateState({
-									showData:{$set:false}
-								})
-							}}
-							onFocus={event=>{
-								this.updateState({
-									showData:{$set:true}
-								})
-							}}/>
+						<input ref="input" {...this.props.inputProps}/>
 					</div>
-					<div className="picker-data" style={{display:this.state.showData?'':'none'}}>
+					<div className="picker-data" style={{display:this.props.pickerVisible?'':'none'}}>
 						{React.Children.only(this.props.children)}
 					</div>
 				</div>

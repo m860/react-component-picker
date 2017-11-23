@@ -1,5 +1,25 @@
 # react-component-picker
 
+<!-- badge -->
+[![npm version](https://img.shields.io/npm/v/react-component-picker.svg)](https://www.npmjs.com/package/react-component-picker)
+[![npm license](https://img.shields.io/npm/l/react-component-picker.svg)](https://www.npmjs.com/package/react-component-picker)
+[![npm download](https://img.shields.io/npm/dm/react-component-picker.svg)](https://www.npmjs.com/package/react-component-picker)
+[![npm download](https://img.shields.io/npm/dt/react-component-picker.svg)](https://www.npmjs.com/package/react-component-picker)
+<!-- endbadge -->
+
+(API & Documentation)[./API.md]
+
+## Install & Usage
+
+```bash
+$ npm i react-component-picker --save
+```
+
+```javascript
+import 'react-component-picker/css/picker.css'
+import {HistoryTextInputPicker} from 'react-component-picker'
+```
+
 ## picker
 
 ### HistoryPicker
