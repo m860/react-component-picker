@@ -7,7 +7,7 @@
 [![npm download](https://img.shields.io/npm/dt/react-component-picker.svg)](https://www.npmjs.com/package/react-component-picker)
 <!-- endbadge -->
 
-(API & Documentation)[./API.md]
+[API & Documentation](./API.md)
 
 ## Install & Usage
 
