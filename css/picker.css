@@ -1,0 +1,30 @@
+.picker {
+  position: relative;
+  display: inline-block; }
+  .picker .picker-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column; }
+    .picker .picker-wrapper .picker-input input {
+      outline: none;
+      box-sizing: border-box; }
+    .picker .picker-wrapper .picker-data {
+      background-color: white;
+      border-bottom: solid 1px silver;
+      border-left: solid 1px silver;
+      border-right: solid 1px silver;
+      border-top-width: 0 !important; }
+
+.history-picker {
+  padding: 5px; }
+  .history-picker a {
+    display: inline-block;
+    padding: 2px;
+    box-sizing: border-box;
+    border: solid 1px silver;
+    border-radius: 3px;
+    margin: 2px;
+    text-decoration: none; }
