@@ -17,7 +17,7 @@ $ npm i react-component-picker --save
 
 ```javascript
 import 'react-component-picker/css/picker.css'
-import {HistoryTextInputPicker} from 'react-component-picker'
+import {HistoryTextInputPicker,CascadePicker} from 'react-component-picker'
 ```
 
 ## picker
