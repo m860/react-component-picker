@@ -7,7 +7,7 @@
 [![npm download](https://img.shields.io/npm/dt/react-component-picker.svg)](https://www.npmjs.com/package/react-component-picker)
 <!-- endbadge -->
 
-[API & Documentation](./API.md)
+[Documentation & Examples](./API.md)
 
 ## Install & Usage
 
@@ -22,7 +22,7 @@ import {HistoryTextInputPicker} from 'react-component-picker'
 
 ## picker
 
-### HistoryPicker
+### HistoryTextInputPicker
 
 - 当focus时,如果有history就展示history的内容供选择,实现快速输入;如果没有history就不展示
 - 当blur时,将输入的值和history进行比较,如果存在就把输入值排在第一个,如果不存在就加入到history的第一个
