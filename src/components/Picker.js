@@ -24,10 +24,15 @@ export default class Picker extends BaseComponent {
 		};
 	}
 
-	triggerChange(value) {
+	change(value) {
 		const {input} =this.refs;
 		input.value = value;
 		triggerChange(input)
+	}
+
+	focus() {
+		const {input} =this.refs;
+		input.focus();
 	}
 
 	render() {
@@ -44,7 +49,7 @@ export default class Picker extends BaseComponent {
 				onMouseEnter={this.props.onMouseEnter}
 				className="picker"
 				style={pickerStyle}>
-				<div className="picker-wrapper" style={{zIndex:this.state.showData?999:'auto'}}>
+				<div className="picker-wrapper" style={{zIndex:this.props.pickerVisible?999:'auto'}}>
 					<div className="picker-input">
 						<input ref="input" {...this.props.inputProps}/>
 					</div>

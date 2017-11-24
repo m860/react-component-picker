@@ -114,14 +114,14 @@ export default class HistoryTextInputPicker extends BaseComponent {
 				onMouseLeave={()=>this.hover=false}
 				onMouseEnter={()=>this.hover=true}>
 				<div
-					className="history-picker">
+					className="history-text-input-picker">
 					{this.state.data.map((item, index)=> {
 						return (
 							<a
 								onClick={(event)=>{
 									//emit onChange
 									const {picker}=this.refs;
-									picker.triggerChange(item);
+									picker.change(item);
 								}}
 								href="javascript:void(0)"
 								key={index}>{item}</a>

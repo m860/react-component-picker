@@ -182,7 +182,7 @@ var HistoryTextInputPicker = function (_BaseComponent) {
 									//emit onChange
 									var picker = _this3.refs.picker;
 
-									picker.triggerChange(item);
+									picker.change(item);
 								},
 								href: 'javascript:void(0)',
 								key: index },

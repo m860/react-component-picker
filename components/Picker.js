@@ -66,7 +66,7 @@ var Picker = function (_BaseComponent) {
 	}
 
 	(0, _createClass3.default)(Picker, [{
-		key: 'triggerChange',
+		key: 'change',
 		value: function triggerChange(value) {
 			var input = this.refs.input;
 
