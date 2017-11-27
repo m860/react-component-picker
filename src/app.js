@@ -83,13 +83,13 @@ class Example extends Component {
 									);
 								}
 							}}>
-							{(next)=> {
+							{(select)=> {
 								return (
 									<ul>
 										{this.state.CascadePickerData.map((item, index)=> {
 											return (
 												<li key={index} onClick={()=>{
-													next(item);
+													select(item);
 												}}>{item.text}</li>
 											);
 										})}

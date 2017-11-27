@@ -5,15 +5,73 @@ import Picker from './Picker'
 
 /**
  * DataPicker
+ *
+ * 可以实现各种复杂的Picker
+ *
+ * @example
+ *
+ * <DataPicker
+ *    value={this.state.selectedCascadeData.map(f=>f.text).join(' -> ')}
+ *    onChange={(action,dataItem)=>{
+ *		if(action==='select'){
+ *			let lastSelected;
+ *			if(this.state.selectedCascadeData.length>0){
+ *				lastSelected=this.state.selectedCascadeData[this.state.selectedCascadeData.length-1];
+ *			}
+ *			let newState=Object.assign({},this.state);
+ *			if(!lastSelected || lastSelected.text!==dataItem.text){
+ *				newState=update(newState,{
+ *				selectedCascadeData:{$push:[dataItem]},
+ *			});
+ *			}
+ *			if(dataItem.children){
+ *				newState=update(newState,{
+ *					CascadePickerData:{$set:dataItem.children}
+ *				});
+ *			}
+ *			this.setState(newState);
+ *		}
+ *		if(action==='delete'){
+ *			this.setState(
+ *				update(this.state,{
+ *					selectedCascadeData:{$set:this.state.selectedCascadeData.slice(0,this.state.selectedCascadeData.length-1)},
+ *					CascadePickerData:{$set:[...this.originalCascadePickerData]}
+ *				})
+ *			);
+ *		}
+ *	}}>
+ *     {(select)=> {
+ *		 return (
+ *			 <ul>
+ *				 {this.state.CascadePickerData.map((item, index)=> {
+ *					 return (
+ *						 <li key={index} onClick={()=>{
+ *							 select(item);
+ *						 }}>{item.text}</li>
+ *					 );
+ *				 })}
+ *			 </ul>
+ *		 );
+ *	 }}
+ *     </DataPicker>
+ *
  * */
 export default class DataPicker extends BaseComponent {
+	/**
+	 * @property {Object} option
+	 * @property {Object} option.filter
+	 * @property {Boolean} option.filter.show [false]
+	 * @property {Function} option.filter.onChange [()=>null]
+	 * @property {Function} children - (select)=>null
+	 * */
 	static propTypes = {
 		option: PropTypes.shape({
 			filter: PropTypes.shape({
 				show: PropTypes.bool,
 				onChange: PropTypes.func
 			})
-		})
+		}),
+		children: PropTypes.func.isRequired
 	};
 
 	static defaultProps = {
@@ -30,7 +88,10 @@ export default class DataPicker extends BaseComponent {
 		this.state = {};
 	}
 
-	clickItem(data) {
+	/**
+	 * @private
+	 * */
+	select(data) {
 		if (this.props.onChange) {
 			this.props.onChange('select', data);
 		}
@@ -69,7 +130,7 @@ export default class DataPicker extends BaseComponent {
 						<input type="text" placeholder="filter" onChange={filterOption.onChange}/>
 					</div>
 					<div className="content">
-						{this.props.children(this.clickItem.bind(this))}
+						{this.props.children(this.select.bind(this))}
 					</div>
 				</div>
 			</Picker>
