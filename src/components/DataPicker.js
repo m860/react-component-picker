@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import Picker from './Picker'
 
 /**
- * CascadePicker
+ * DataPicker
  * */
-export default class CascadePicker extends BaseComponent {
+export default class DataPicker extends BaseComponent {
 	static propTypes = {
 		option: PropTypes.shape({
 			filter: PropTypes.shape({
@@ -32,7 +32,7 @@ export default class CascadePicker extends BaseComponent {
 
 	clickItem(data) {
 		if (this.props.onChange) {
-			this.props.onChange('push', data);
+			this.props.onChange('select', data);
 		}
 		const {picker}=this.refs;
 		picker.focus();
@@ -44,7 +44,7 @@ export default class CascadePicker extends BaseComponent {
 			onKeyDown: event=> {
 				this.props.onKeyDown && this.props.onKeyDown(event);
 				if (event.keyCode === 8) {
-					this.props.onChange && this.props.onChange('pop');
+					this.props.onChange && this.props.onChange('delete');
 				}
 			}
 		});

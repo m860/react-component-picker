@@ -4,7 +4,7 @@ import React, {PropTypes, Component} from 'react'
 import ReactDOM from 'react-dom'
 import HistoryTextInputPicker from './components/HistoryTextInputPicker'
 import update from 'immutability-helper'
-import CascadePicker from './components/CascadePicker'
+import DataPicker from './components/DataPicker'
 
 class Example extends Component {
 	constructor(props) {
@@ -53,10 +53,10 @@ class Example extends Component {
 					</div>
 					<div>
 						<label>CascadePicker</label>
-						<CascadePicker
+						<DataPicker
 							value={this.state.selectedCascadeData.map(f=>f.text).join(' -> ')}
 							onChange={(action,dataItem)=>{
-								if(action==='push'){
+								if(action==='select'){
 									let lastSelected;
 									if(this.state.selectedCascadeData.length>0){
 										lastSelected=this.state.selectedCascadeData[this.state.selectedCascadeData.length-1];
@@ -74,7 +74,7 @@ class Example extends Component {
 									}
 									this.setState(newState);
 								}
-								if(action==='pop'){
+								if(action==='delete'){
 									this.setState(
 										update(this.state,{
 											selectedCascadeData:{$set:this.state.selectedCascadeData.slice(0,this.state.selectedCascadeData.length-1)},
@@ -96,7 +96,7 @@ class Example extends Component {
 									</ul>
 								);
 							}}
-						</CascadePicker>
+						</DataPicker>
 					</div>
 					<div>
 						<label>Name</label>
