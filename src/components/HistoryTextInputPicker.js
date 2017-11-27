@@ -11,9 +11,9 @@ import Picker from './Picker'
  * @example
  *
  * <HistoryTextInputPicker
- *	name="abc"
- * 	value={this.state.HistoryTextInputPicker}
- * 	onChange={event=>{
+ *    name="abc"
+ *    value={this.state.HistoryTextInputPicker}
+ *    onChange={event=>{
  *		this.setState(update(this.state,{HistoryTextInputPicker:{$set:event.target.value}}));
  *	}}/>
  *
@@ -46,9 +46,7 @@ export default class HistoryTextInputPicker extends BaseComponent {
 		}
 		this.state = {
 			data: initialData,
-			pickerVisible: false,
 		};
-		this.hover = false;
 	}
 
 	get key() {
@@ -70,49 +68,10 @@ export default class HistoryTextInputPicker extends BaseComponent {
 	}
 
 	render() {
-		let inputProps = Object.assign({}, this.props, {
-			onFocus: event=> {
-				this.props.onFocus && this.props.onFocus(event);
-				if (this.state.data.length > 0) {
-					this.updateState({
-						pickerVisible: {$set: true}
-					});
-				}
-			},
-			onBlur: event=> {
-				this.props.onBlur && this.props.onBlur(event);
-				const value = event.target.value;
-				const index = this.state.data.findIndex(f=>f === value);
-				let newState = {};
-				if (index < 0) {
-					if (value !== '') {
-						newState.data = {$set: [value, ...this.state.data].slice(0, this.props.maxHistory)}
-					}
-				}
-				else {
-					let data = [value, ...this.state.data];
-					data.splice(index + 1, 1);
-					newState.data = {$set: data.slice(0, this.props.maxHistory)}
-				}
-				if (!this.hover) {
-					newState.pickerVisible = {$set: false};
-				}
-				else {
-					event.target.focus();
-				}
-				this.updateState(newState, ()=> {
-					window.localStorage.setItem(this.key, JSON.stringify(this.state.data));
-				})
-			}
-		});
+		let inputProps = Object.assign({}, this.props);
 		delete inputProps.maxHistory;
 		return (
-			<Picker
-				ref="picker"
-				pickerVisible={this.state.pickerVisible}
-				inputProps={inputProps}
-				onMouseLeave={()=>this.hover=false}
-				onMouseEnter={()=>this.hover=true}>
+			<Picker ref="picker" {...inputProps}>
 				<div
 					className="history-text-input-picker">
 					{this.state.data.map((item, index)=> {
@@ -122,6 +81,7 @@ export default class HistoryTextInputPicker extends BaseComponent {
 									//emit onChange
 									const {picker}=this.refs;
 									picker.change(item);
+									picker.focus();
 								}}
 								href="javascript:void(0)"
 								key={index}>{item}</a>

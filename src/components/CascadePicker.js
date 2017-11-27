@@ -20,11 +20,7 @@ export default class CascadePicker extends BaseComponent {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			hover: false,
-			focus: false,
-		};
-		this.pickerVisible = false;
+		this.state = {};
 	}
 
 	clickItem(data) {
@@ -38,14 +34,6 @@ export default class CascadePicker extends BaseComponent {
 
 	render() {
 		let inputProps = Object.assign({}, this.props, {
-			onFocus: event=> {
-				this.props.onFocus && this.props.onFocus(event);
-				this.updateState({focus: {$set: true}})
-			},
-			onBlur: event=> {
-				this.props.onBlur && this.props.onBlur(event);
-				this.updateState({focus: {$set: false}})
-			},
 			onKeyDown: event=> {
 				this.props.onKeyDown && this.props.onKeyDown(event);
 				if (event.keyCode === 8) {
@@ -57,25 +45,8 @@ export default class CascadePicker extends BaseComponent {
 		delete inputProps.children;
 		delete inputProps.onChange;
 
-		let pickerVisible = this.pickerVisible;
-		if (this.pickerVisible) {
-			if (!this.state.hover && !this.state.focus) {
-				pickerVisible = false;
-			}
-		}
-		else {
-			if (this.state.focus) {
-				pickerVisible = true;
-			}
-		}
-		this.pickerVisible = pickerVisible;
 		return (
-			<Picker
-				ref="picker"
-				pickerVisible={this.pickerVisible}
-				inputProps={inputProps}
-				onMouseLeave={()=>this.updateState({hover:{$set:false}})}
-				onMouseEnter={()=>this.updateState({hover:{$set:true}})}>
+			<Picker ref="picker" {...inputProps}>
 				<div
 					className="cascade-picker">
 					<div className="filter">

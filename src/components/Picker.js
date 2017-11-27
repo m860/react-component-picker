@@ -4,24 +4,16 @@ import PropTypes from 'prop-types'
 import triggerChange from 'react-trigger-change'
 
 export default class Picker extends BaseComponent {
-	static propTypes = {
-		pickerVisible: PropTypes.bool,
-		inputProps: PropTypes.object,
-		onMouseEnter: PropTypes.func,
-		onMouseLeave: PropTypes.func
-	};
-
-	static defaultProps = {
-		pickerVisible: false,
-		inputProps: {}
-	};
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			width: null,
-			height: null
+			height: null,
+			focus: false,
+			hover: false
 		};
+		this.visible = false;
 	}
 
 	change(value) {
@@ -43,17 +35,42 @@ export default class Picker extends BaseComponent {
 		if (this.state.height) {
 			pickerStyle.minHeight = this.state.height;
 		}
+		let inputProps = Object.assign({}, this.props, {
+			onFocus: event=> {
+				this.props.onFocus && this.props.onFocus(event);
+				this.updateState({focus: {$set: true}})
+			},
+			onBlur: event=> {
+				this.props.onBlur && this.props.onBlur(event);
+				this.updateState({focus: {$set: false}})
+			}
+		});
+		delete inputProps.children;
+
+		let visible = this.visible;
+		if (this.visible) {
+			if (!this.state.hover && !this.state.focus) {
+				visible = false;
+			}
+		}
+		else {
+			if (this.state.focus) {
+				visible = true;
+			}
+		}
+		this.visible = visible;
+
 		return (
 			<div
-				onMouseLeave={this.props.onMouseLeave}
-				onMouseEnter={this.props.onMouseEnter}
+				onMouseLeave={()=>this.updateState({hover:{$set:false}})}
+				onMouseEnter={()=>this.updateState({hover:{$set:true}})}
 				className="picker"
 				style={pickerStyle}>
-				<div className="picker-wrapper" style={{zIndex:this.props.pickerVisible?999:'auto'}}>
+				<div className="picker-wrapper" style={{zIndex:visible?999:'auto'}}>
 					<div className="picker-input">
-						<input ref="input" {...this.props.inputProps}/>
+						<input ref="input" {...inputProps}/>
 					</div>
-					<div className="picker-data" style={{display:this.props.pickerVisible?'':'none'}}>
+					<div className="picker-data" style={{display:visible?'':'none'}}>
 						{React.Children.only(this.props.children)}
 					</div>
 				</div>
