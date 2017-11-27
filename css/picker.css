@@ -18,9 +18,9 @@
       border-right: solid 1px silver;
       border-top-width: 0 !important; }
 
-.history-picker {
+.history-text-input-picker {
   padding: 5px; }
-  .history-picker a {
+  .history-text-input-picker a {
     display: inline-block;
     padding: 2px;
     box-sizing: border-box;

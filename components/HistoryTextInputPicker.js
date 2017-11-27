@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _assign = require('babel-runtime/core-js/object/assign');
 
 var _assign2 = _interopRequireDefault(_assign);
@@ -62,9 +66,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @example
  *
  * <HistoryTextInputPicker
- *	name="abc"
- * 	value={this.state.HistoryTextInputPicker}
- * 	onChange={event=>{
+ *    name="abc"
+ *    value={this.state.HistoryTextInputPicker}
+ *    onChange={event=>{
  *		this.setState(update(this.state,{HistoryTextInputPicker:{$set:event.target.value}}));
  *	}}/>
  *
@@ -91,10 +95,8 @@ var HistoryTextInputPicker = function (_BaseComponent) {
 			}
 		}
 		_this.state = {
-			data: initialData,
-			pickerVisible: false
+			data: initialData
 		};
-		_this.hover = false;
 		return _this;
 	}
 
@@ -122,58 +124,15 @@ var HistoryTextInputPicker = function (_BaseComponent) {
 		value: function render() {
 			var _this3 = this;
 
-			var inputProps = (0, _assign2.default)({}, this.props, {
-				onFocus: function onFocus(event) {
-					_this3.props.onFocus && _this3.props.onFocus(event);
-					if (_this3.state.data.length > 0) {
-						_this3.updateState({
-							pickerVisible: { $set: true }
-						});
-					}
-				},
-				onBlur: function onBlur(event) {
-					_this3.props.onBlur && _this3.props.onBlur(event);
-					var value = event.target.value;
-					var index = _this3.state.data.findIndex(function (f) {
-						return f === value;
-					});
-					var newState = {};
-					if (index < 0) {
-						if (value !== '') {
-							newState.data = { $set: [value].concat((0, _toConsumableArray3.default)(_this3.state.data)).slice(0, _this3.props.maxHistory) };
-						}
-					} else {
-						var data = [value].concat((0, _toConsumableArray3.default)(_this3.state.data));
-						data.splice(index + 1, 1);
-						newState.data = { $set: data.slice(0, _this3.props.maxHistory) };
-					}
-					if (!_this3.hover) {
-						newState.pickerVisible = { $set: false };
-					} else {
-						event.target.focus();
-					}
-					_this3.updateState(newState, function () {
-						window.localStorage.setItem(_this3.key, (0, _stringify2.default)(_this3.state.data));
-					});
-				}
-			});
+			var inputProps = (0, _assign2.default)({}, this.props);
 			delete inputProps.maxHistory;
 			return _react2.default.createElement(
 				_Picker2.default,
-				{
-					ref: 'picker',
-					pickerVisible: this.state.pickerVisible,
-					inputProps: inputProps,
-					onMouseLeave: function onMouseLeave() {
-						return _this3.hover = false;
-					},
-					onMouseEnter: function onMouseEnter() {
-						return _this3.hover = true;
-					} },
+				(0, _extends3.default)({ ref: 'picker' }, inputProps),
 				_react2.default.createElement(
 					'div',
 					{
-						className: 'history-picker' },
+						className: 'history-text-input-picker' },
 					this.state.data.map(function (item, index) {
 						return _react2.default.createElement(
 							'a',
@@ -183,6 +142,7 @@ var HistoryTextInputPicker = function (_BaseComponent) {
 									var picker = _this3.refs.picker;
 
 									picker.change(item);
+									picker.focus();
 								},
 								href: 'javascript:void(0)',
 								key: index },

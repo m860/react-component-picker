@@ -2,12 +2,89 @@
 
 ### Table of Contents
 
--   [HistoryTextInputPicker](#historytextinputpicker)
+-   [DataPicker](#datapicker)
     -   [propTypes](#proptypes)
+-   [HistoryTextInputPicker](#historytextinputpicker)
+    -   [propTypes](#proptypes-1)
+
+## DataPicker
+
+[src/components/DataPicker.js:59-140](https://github.com/m860/react-component-picker/blob/84bd960bf71418729cd4f6050d951b94d4de19cb/src/components/DataPicker.js#L59-L140 "Source code on GitHub")
+
+**Extends BaseComponent**
+
+DataPicker
+
+可以实现各种复杂的Picker
+
+**Parameters**
+
+-   `props`  
+
+**Examples**
+
+```javascript
+<DataPicker
+   value={this.state.selectedCascadeData.map(f=>f.text).join(' -> ')}
+   onChange={(action,dataItem)=>{
+	if(action==='select'){
+		let lastSelected;
+		if(this.state.selectedCascadeData.length>0){
+			lastSelected=this.state.selectedCascadeData[this.state.selectedCascadeData.length-1];
+		}
+		let newState=Object.assign({},this.state);
+		if(!lastSelected || lastSelected.text!==dataItem.text){
+			newState=update(newState,{
+			selectedCascadeData:{$push:[dataItem]},
+		});
+		}
+		if(dataItem.children){
+			newState=update(newState,{
+				CascadePickerData:{$set:dataItem.children}
+			});
+		}
+		this.setState(newState);
+	}
+	if(action==='delete'){
+		this.setState(
+			update(this.state,{
+				selectedCascadeData:{$set:this.state.selectedCascadeData.slice(0,this.state.selectedCascadeData.length-1)},
+				CascadePickerData:{$set:[...this.originalCascadePickerData]}
+			})
+		);
+	}
+}}>
+    {(select)=> {
+	 return (
+		 <ul>
+			 {this.state.CascadePickerData.map((item, index)=> {
+				 return (
+					 <li key={index} onClick={()=>{
+						 select(item);
+					 }}>{item.text}</li>
+				 );
+			 })}
+		 </ul>
+	 );
+ }}
+    </DataPicker>
+```
+
+### propTypes
+
+[src/components/DataPicker.js:67-75](https://github.com/m860/react-component-picker/blob/84bd960bf71418729cd4f6050d951b94d4de19cb/src/components/DataPicker.js#L67-L75 "Source code on GitHub")
+
+**Properties**
+
+-   `option` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `option.filter` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+        -   `option.filter.show` **[Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** [false]
+        -   `option.filter.onChange` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** [()=>null]
+-   `children` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** (select)=>null
 
 ## HistoryTextInputPicker
 
-[src/components/HistoryTextInputPicker.js:21-135](https://github.com/m860/react-component-picker/blob/09c1c4d4f4e46617c720b836824640e13152a773/src/components/HistoryTextInputPicker.js#L21-L135 "Source code on GitHub")
+[src/components/HistoryTextInputPicker.js:21-95](https://github.com/m860/react-component-picker/blob/84bd960bf71418729cd4f6050d951b94d4de19cb/src/components/HistoryTextInputPicker.js#L21-L95 "Source code on GitHub")
 
 **Extends BaseComponent**
 
@@ -23,16 +100,16 @@ HistoryTextInputPicker
 
 ```javascript
 <HistoryTextInputPicker
-name="abc"
-	value={this.state.HistoryTextInputPicker}
-	onChange={event=>{
+   name="abc"
+   value={this.state.HistoryTextInputPicker}
+   onChange={event=>{
 	this.setState(update(this.state,{HistoryTextInputPicker:{$set:event.target.value}}));
 }}/>
 ```
 
 ### propTypes
 
-[src/components/HistoryTextInputPicker.js:26-29](https://github.com/m860/react-component-picker/blob/09c1c4d4f4e46617c720b836824640e13152a773/src/components/HistoryTextInputPicker.js#L26-L29 "Source code on GitHub")
+[src/components/HistoryTextInputPicker.js:26-29](https://github.com/m860/react-component-picker/blob/84bd960bf71418729cd4f6050d951b94d4de19cb/src/components/HistoryTextInputPicker.js#L26-L29 "Source code on GitHub")
 
 **Properties**
 
