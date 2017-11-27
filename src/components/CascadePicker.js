@@ -16,7 +16,14 @@ export default class CascadePicker extends BaseComponent {
 		})
 	};
 
-	static defaultProps = {};
+	static defaultProps = {
+		option: {
+			filter: {
+				show: false,
+				onChange: ()=>null
+			}
+		}
+	};
 
 	constructor(props) {
 		super(props);
@@ -45,20 +52,24 @@ export default class CascadePicker extends BaseComponent {
 		delete inputProps.children;
 		delete inputProps.onChange;
 
+		let filterOption = {
+			show: false,
+			onChange: ()=> null
+		};
+		if (this.props.option) {
+			if (this.props.option.filter) {
+				filterOption = Object.assign(filterOption, this.props.option.filter);
+			}
+		}
 		return (
 			<Picker ref="picker" {...inputProps}>
 				<div
 					className="cascade-picker">
-					<div className="filter">
-						<input type="text" placeholder="filter"/>
+					<div className="filter" style={{display:filterOption.show?'':'none'}}>
+						<input type="text" placeholder="filter" onChange={filterOption.onChange}/>
 					</div>
 					<div className="content">
 						{this.props.children(this.clickItem.bind(this))}
-					</div>
-					<div className="buttons">
-						<button
-							type="button">确定
-						</button>
 					</div>
 				</div>
 			</Picker>
