@@ -108,15 +108,21 @@ var HistoryTextInputPicker = function (_BaseComponent) {
 			var index = this.state.data.findIndex(function (f) {
 				return f === value;
 			});
+			var data = void 0;
 			if (index < 0) {
 				if (value !== '') {
-					var data = [value].concat((0, _toConsumableArray3.default)(this.state.data));
-					this.updateState({
-						data: { $set: data.slice(0, this.props.maxHistory) }
-					}, function () {
-						window.localStorage.setItem(_this2.key, (0, _stringify2.default)(_this2.state.data));
-					});
+					data = [value].concat((0, _toConsumableArray3.default)(this.state.data));
 				}
+			} else {
+				data = [value].concat((0, _toConsumableArray3.default)(this.state.data));
+				data.splice(index + 1, 1);
+			}
+			if (data) {
+				this.updateState({
+					data: { $set: data.slice(0, this.props.maxHistory) }
+				}, function () {
+					window.localStorage.setItem(_this2.key, (0, _stringify2.default)(_this2.state.data));
+				});
 			}
 		}
 	}, {
@@ -124,7 +130,12 @@ var HistoryTextInputPicker = function (_BaseComponent) {
 		value: function render() {
 			var _this3 = this;
 
-			var inputProps = (0, _assign2.default)({}, this.props);
+			var inputProps = (0, _assign2.default)({}, this.props, {
+				onBlur: function onBlur(event) {
+					_this3.props.onBlur && _this3.props.onBlur(event);
+					_this3.buildNewData(event.target.value);
+				}
+			});
 			delete inputProps.maxHistory;
 			return _react2.default.createElement(
 				_Picker2.default,

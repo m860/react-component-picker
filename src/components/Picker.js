@@ -64,13 +64,13 @@ export default class Picker extends BaseComponent {
 			<div
 				onMouseLeave={()=>this.updateState({hover:{$set:false}})}
 				onMouseEnter={()=>this.updateState({hover:{$set:true}})}
-				className="picker"
+				className="react-component-picker"
 				style={pickerStyle}>
-				<div className="picker-wrapper" style={{zIndex:visible?999:'auto'}}>
-					<div className="picker-input">
+				<div className="react-component-picker-wrapper" style={{zIndex:visible?999:'auto'}}>
+					<div className="react-component-picker-input">
 						<input ref="input" {...inputProps}/>
 					</div>
-					<div className="picker-data" style={{display:visible?'':'none'}}>
+					<div className="react-component-picker-data" style={{display:visible?'':'none'}}>
 						{React.Children.only(this.props.children)}
 					</div>
 				</div>

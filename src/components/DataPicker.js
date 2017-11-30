@@ -124,12 +124,11 @@ export default class DataPicker extends BaseComponent {
 		}
 		return (
 			<Picker ref="picker" {...inputProps}>
-				<div
-					className="cascade-picker">
-					<div className="filter" style={{display:filterOption.show?'':'none'}}>
+				<div>
+					<div style={{display:filterOption.show?'':'none'}}>
 						<input type="text" placeholder="filter" onChange={filterOption.onChange}/>
 					</div>
-					<div className="content">
+					<div>
 						{this.props.children(this.select.bind(this))}
 					</div>
 				</div>

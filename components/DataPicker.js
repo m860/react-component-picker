@@ -171,16 +171,15 @@ var DataPicker = function (_BaseComponent) {
 				(0, _extends3.default)({ ref: 'picker' }, inputProps),
 				_react2.default.createElement(
 					'div',
-					{
-						className: 'cascade-picker' },
+					null,
 					_react2.default.createElement(
 						'div',
-						{ className: 'filter', style: { display: filterOption.show ? '' : 'none' } },
+						{ style: { display: filterOption.show ? '' : 'none' } },
 						_react2.default.createElement('input', { type: 'text', placeholder: 'filter', onChange: filterOption.onChange })
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'content' },
+						null,
 						this.props.children(this.select.bind(this))
 					)
 				)

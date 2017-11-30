@@ -132,19 +132,19 @@ var Picker = function (_BaseComponent) {
 					onMouseEnter: function onMouseEnter() {
 						return _this2.updateState({ hover: { $set: true } });
 					},
-					className: 'picker',
+					className: 'react-component-picker',
 					style: pickerStyle },
 				_react2.default.createElement(
 					'div',
-					{ className: 'picker-wrapper', style: { zIndex: visible ? 999 : 'auto' } },
+					{ className: 'react-component-picker-wrapper', style: { zIndex: visible ? 999 : 'auto' } },
 					_react2.default.createElement(
 						'div',
-						{ className: 'picker-input' },
+						{ className: 'react-component-picker-input' },
 						_react2.default.createElement('input', (0, _extends3.default)({ ref: 'input' }, inputProps))
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'picker-data', style: { display: visible ? '' : 'none' } },
+						{ className: 'react-component-picker-data', style: { display: visible ? '' : 'none' } },
 						_react2.default.Children.only(this.props.children)
 					)
 				)
