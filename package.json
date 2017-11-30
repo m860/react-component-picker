@@ -57,11 +57,13 @@
     "yargs": "^8.0.2"
   },
   "peerDependencies": {
-    "classnames": "^2.2.4",
-    "immutability-helper": "^2.3.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.4",
+    "immutability-helper": "^2.3.1",
     "react-trigger-change": "^1.0.2"
   }
 }
