@@ -55,20 +55,32 @@ export default class HistoryTextInputPicker extends BaseComponent {
 
 	buildNewData(value) {
 		const index = this.state.data.findIndex(f=>f === value);
+		let data;
 		if (index < 0) {
 			if (value !== '') {
-				const data = [value, ...this.state.data];
-				this.updateState({
-					data: {$set: data.slice(0, this.props.maxHistory)}
-				}, ()=> {
-					window.localStorage.setItem(this.key, JSON.stringify(this.state.data));
-				});
+				data = [value, ...this.state.data];
 			}
+		}
+		else {
+			data = [value, ...this.state.data];
+			data.splice(index + 1, 1);
+		}
+		if (data) {
+			this.updateState({
+				data: {$set: data.slice(0, this.props.maxHistory)}
+			}, ()=> {
+				window.localStorage.setItem(this.key, JSON.stringify(this.state.data));
+			});
 		}
 	}
 
 	render() {
-		let inputProps = Object.assign({}, this.props);
+		let inputProps = Object.assign({}, this.props, {
+			onBlur: (event)=> {
+				this.props.onBlur && this.props.onBlur(event);
+				this.buildNewData(event.target.value);
+			}
+		});
 		delete inputProps.maxHistory;
 		return (
 			<Picker ref="picker" {...inputProps}>

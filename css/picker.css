@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: column; }
     .picker .picker-wrapper .picker-input input {
-      outline: none;
       box-sizing: border-box; }
     .picker .picker-wrapper .picker-data {
       background-color: white;
@@ -22,7 +21,7 @@
   padding: 5px; }
   .history-text-input-picker a {
     display: inline-block;
-    padding: 2px;
+    padding: 2px 8px;
     box-sizing: border-box;
     border: solid 1px silver;
     border-radius: 3px;

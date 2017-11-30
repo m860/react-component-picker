@@ -1,4 +1,3 @@
-import './sass/test.sass'
 import './sass/picker.sass'
 import React, {PropTypes, Component} from 'react'
 import ReactDOM from 'react-dom'
@@ -10,22 +9,25 @@ class Example extends Component {
 	constructor(props) {
 		super(props);
 		this.originalCascadePickerData = [{
-			text: "四川省",
-			value: 1,
+			text: "level-1",
 			children: [{
-				text: '成都市',
-				value: 1,
+				text: 'level-1-1',
 				children: [{
-					text: '高新区',
-					value: 1
+					text: 'level-1-1-1',
 				}, {
-					text: '靖江区',
-					value: 2
+					text: 'level-1-1-2',
+				}, {
+					text: 'level-1-1-3',
+				}, {
+					text: 'level-1-1-4',
 				}]
 			}, {
-				text: '绵阳市',
-				value: 2
+				text: 'level-1-2',
 			}]
+		},{
+			text:"level-2"
+		},{
+			text:"level-3"
 		}]
 		this.state = {
 			HistoryTextInputPicker: '',
@@ -52,8 +54,9 @@ class Example extends Component {
 							}}/>
 					</div>
 					<div>
-						<label>CascadePicker</label>
+						<label>DataPicker</label>
 						<DataPicker
+							style={{width:200}}
 							value={this.state.selectedCascadeData.map(f=>f.text).join(' -> ')}
 							onChange={(action,dataItem)=>{
 								if(action==='select'){

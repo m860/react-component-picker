@@ -4,12 +4,13 @@
 
 -   [DataPicker](#datapicker)
     -   [propTypes](#proptypes)
+-   [DataPickerActions](#datapickeractions)
 -   [HistoryTextInputPicker](#historytextinputpicker)
     -   [propTypes](#proptypes-1)
 
 ## DataPicker
 
-[src/components/DataPicker.js:59-140](https://github.com/m860/react-component-picker/blob/84bd960bf71418729cd4f6050d951b94d4de19cb/src/components/DataPicker.js#L59-L140 "Source code on GitHub")
+[src/components/DataPicker.js:59-139](https://github.com/m860/react-component-picker/blob/6e4660be890c71aa424dbbe959c4bfd28f45a021/src/components/DataPicker.js#L59-L139 "Source code on GitHub")
 
 **Extends BaseComponent**
 
@@ -67,12 +68,12 @@ DataPicker
 		 </ul>
 	 );
  }}
-    </DataPicker>
+</DataPicker>
 ```
 
 ### propTypes
 
-[src/components/DataPicker.js:67-75](https://github.com/m860/react-component-picker/blob/84bd960bf71418729cd4f6050d951b94d4de19cb/src/components/DataPicker.js#L67-L75 "Source code on GitHub")
+[src/components/DataPicker.js:67-75](https://github.com/m860/react-component-picker/blob/6e4660be890c71aa424dbbe959c4bfd28f45a021/src/components/DataPicker.js#L67-L75 "Source code on GitHub")
 
 **Properties**
 
@@ -82,9 +83,15 @@ DataPicker
         -   `option.filter.onChange` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** [()=>null]
 -   `children` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** (select)=>null
 
+## DataPickerActions
+
+[src/components/DataPicker.js:144-147](https://github.com/m860/react-component-picker/blob/6e4660be890c71aa424dbbe959c4bfd28f45a021/src/components/DataPicker.js#L144-L147 "Source code on GitHub")
+
+DataPickerActions
+
 ## HistoryTextInputPicker
 
-[src/components/HistoryTextInputPicker.js:21-95](https://github.com/m860/react-component-picker/blob/84bd960bf71418729cd4f6050d951b94d4de19cb/src/components/HistoryTextInputPicker.js#L21-L95 "Source code on GitHub")
+[src/components/HistoryTextInputPicker.js:21-95](https://github.com/m860/react-component-picker/blob/6e4660be890c71aa424dbbe959c4bfd28f45a021/src/components/HistoryTextInputPicker.js#L21-L95 "Source code on GitHub")
 
 **Extends BaseComponent**
 
@@ -109,7 +116,7 @@ HistoryTextInputPicker
 
 ### propTypes
 
-[src/components/HistoryTextInputPicker.js:26-29](https://github.com/m860/react-component-picker/blob/84bd960bf71418729cd4f6050d951b94d4de19cb/src/components/HistoryTextInputPicker.js#L26-L29 "Source code on GitHub")
+[src/components/HistoryTextInputPicker.js:26-29](https://github.com/m860/react-component-picker/blob/6e4660be890c71aa424dbbe959c4bfd28f45a021/src/components/HistoryTextInputPicker.js#L26-L29 "Source code on GitHub")
 
 **Properties**
 

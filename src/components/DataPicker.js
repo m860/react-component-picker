@@ -53,7 +53,7 @@ import Picker from './Picker'
  *			 </ul>
  *		 );
  *	 }}
- *     </DataPicker>
+ * </DataPicker>
  *
  * */
 export default class DataPicker extends BaseComponent {
@@ -93,7 +93,7 @@ export default class DataPicker extends BaseComponent {
 	 * */
 	select(data) {
 		if (this.props.onChange) {
-			this.props.onChange('select', data);
+			this.props.onChange(DataPickerActions.select, data);
 		}
 		const {picker}=this.refs;
 		picker.focus();
@@ -105,7 +105,7 @@ export default class DataPicker extends BaseComponent {
 			onKeyDown: event=> {
 				this.props.onKeyDown && this.props.onKeyDown(event);
 				if (event.keyCode === 8) {
-					this.props.onChange && this.props.onChange('delete');
+					this.props.onChange && this.props.onChange(DataPickerActions.delete);
 				}
 			}
 		});
@@ -136,5 +136,12 @@ export default class DataPicker extends BaseComponent {
 			</Picker>
 		);
 	}
-
 }
+
+/**
+ * DataPickerActions
+ * */
+export const DataPickerActions = {
+	select: "select",
+	delete: "delete"
+};

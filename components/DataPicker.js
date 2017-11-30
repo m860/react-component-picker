@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.DataPickerActions = undefined;
 
 var _extends2 = require('babel-runtime/helpers/extends');
 
@@ -100,7 +101,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *			 </ul>
  *		 );
  *	 }}
- *     </DataPicker>
+ * </DataPicker>
  *
  * */
 var DataPicker = function (_BaseComponent) {
@@ -131,7 +132,7 @@ var DataPicker = function (_BaseComponent) {
 		key: 'select',
 		value: function select(data) {
 			if (this.props.onChange) {
-				this.props.onChange('select', data);
+				this.props.onChange(DataPickerActions.select, data);
 			}
 			var picker = this.refs.picker;
 
@@ -146,7 +147,7 @@ var DataPicker = function (_BaseComponent) {
 				onKeyDown: function onKeyDown(event) {
 					_this2.props.onKeyDown && _this2.props.onKeyDown(event);
 					if (event.keyCode === 8) {
-						_this2.props.onChange && _this2.props.onChange('delete');
+						_this2.props.onChange && _this2.props.onChange(DataPickerActions.delete);
 					}
 				}
 			});
@@ -189,6 +190,11 @@ var DataPicker = function (_BaseComponent) {
 	return DataPicker;
 }(_BaseComponent3.default);
 
+/**
+ * DataPickerActions
+ * */
+
+
 DataPicker.propTypes = {
 	option: _propTypes2.default.shape({
 		filter: _propTypes2.default.shape({
@@ -209,3 +215,7 @@ DataPicker.defaultProps = {
 	}
 };
 exports.default = DataPicker;
+var DataPickerActions = exports.DataPickerActions = {
+	select: "select",
+	delete: "delete"
+};
