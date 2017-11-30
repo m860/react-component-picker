@@ -3,14 +3,14 @@
 ### Table of Contents
 
 -   [DataPicker](#datapicker)
+    -   [getPickerInstance](#getpickerinstance)
     -   [propTypes](#proptypes)
--   [DataPickerActions](#datapickeractions)
 -   [HistoryTextInputPicker](#historytextinputpicker)
     -   [propTypes](#proptypes-1)
 
 ## DataPicker
 
-[src/components/DataPicker.js:59-138](https://github.com/m860/react-component-picker/blob/64943480c10f5c654cf59be281da10a9813f4fb5/src/components/DataPicker.js#L59-L138 "Source code on GitHub")
+[src/components/DataPicker.js:12-78](https://github.com/m860/react-component-picker/blob/56e7870581214284b5d3ed0ef8d1dce9b50c6181/src/components/DataPicker.js#L12-L78 "Source code on GitHub")
 
 **Extends BaseComponent**
 
@@ -22,58 +22,13 @@ DataPicker
 
 -   `props`  
 
-**Examples**
+### getPickerInstance
 
-```javascript
-<DataPicker
-   value={this.state.selectedCascadeData.map(f=>f.text).join(' -> ')}
-   onChange={(action,dataItem)=>{
-	if(action==='select'){
-		let lastSelected;
-		if(this.state.selectedCascadeData.length>0){
-			lastSelected=this.state.selectedCascadeData[this.state.selectedCascadeData.length-1];
-		}
-		let newState=Object.assign({},this.state);
-		if(!lastSelected || lastSelected.text!==dataItem.text){
-			newState=update(newState,{
-			selectedCascadeData:{$push:[dataItem]},
-		});
-		}
-		if(dataItem.children){
-			newState=update(newState,{
-				CascadePickerData:{$set:dataItem.children}
-			});
-		}
-		this.setState(newState);
-	}
-	if(action==='delete'){
-		this.setState(
-			update(this.state,{
-				selectedCascadeData:{$set:this.state.selectedCascadeData.slice(0,this.state.selectedCascadeData.length-1)},
-				CascadePickerData:{$set:[...this.originalCascadePickerData]}
-			})
-		);
-	}
-}}>
-    {(select)=> {
-	 return (
-		 <ul>
-			 {this.state.CascadePickerData.map((item, index)=> {
-				 return (
-					 <li key={index} onClick={()=>{
-						 select(item);
-					 }}>{item.text}</li>
-				 );
-			 })}
-		 </ul>
-	 );
- }}
-</DataPicker>
-```
+[src/components/DataPicker.js:46-48](https://github.com/m860/react-component-picker/blob/56e7870581214284b5d3ed0ef8d1dce9b50c6181/src/components/DataPicker.js#L46-L48 "Source code on GitHub")
 
 ### propTypes
 
-[src/components/DataPicker.js:67-75](https://github.com/m860/react-component-picker/blob/64943480c10f5c654cf59be281da10a9813f4fb5/src/components/DataPicker.js#L67-L75 "Source code on GitHub")
+[src/components/DataPicker.js:19-26](https://github.com/m860/react-component-picker/blob/56e7870581214284b5d3ed0ef8d1dce9b50c6181/src/components/DataPicker.js#L19-L26 "Source code on GitHub")
 
 **Properties**
 
@@ -81,17 +36,10 @@ DataPicker
     -   `option.filter` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
         -   `option.filter.show` **[Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** [false]
         -   `option.filter.onChange` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** [()=>null]
--   `children` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** (select)=>null
-
-## DataPickerActions
-
-[src/components/DataPicker.js:143-146](https://github.com/m860/react-component-picker/blob/64943480c10f5c654cf59be281da10a9813f4fb5/src/components/DataPicker.js#L143-L146 "Source code on GitHub")
-
-DataPickerActions
 
 ## HistoryTextInputPicker
 
-[src/components/HistoryTextInputPicker.js:21-107](https://github.com/m860/react-component-picker/blob/64943480c10f5c654cf59be281da10a9813f4fb5/src/components/HistoryTextInputPicker.js#L21-L107 "Source code on GitHub")
+[src/components/HistoryTextInputPicker.js:21-107](https://github.com/m860/react-component-picker/blob/56e7870581214284b5d3ed0ef8d1dce9b50c6181/src/components/HistoryTextInputPicker.js#L21-L107 "Source code on GitHub")
 
 **Extends BaseComponent**
 
@@ -116,7 +64,7 @@ HistoryTextInputPicker
 
 ### propTypes
 
-[src/components/HistoryTextInputPicker.js:26-29](https://github.com/m860/react-component-picker/blob/64943480c10f5c654cf59be281da10a9813f4fb5/src/components/HistoryTextInputPicker.js#L26-L29 "Source code on GitHub")
+[src/components/HistoryTextInputPicker.js:26-29](https://github.com/m860/react-component-picker/blob/56e7870581214284b5d3ed0ef8d1dce9b50c6181/src/components/HistoryTextInputPicker.js#L26-L29 "Source code on GitHub")
 
 **Properties**
 
