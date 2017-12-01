@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _extends2 = require('babel-runtime/helpers/extends');
@@ -55,94 +55,91 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * 可以实现各种复杂的Picker
  *
+ * @example
+ *
+ * <DataPicker
+ *	 style={{width:200}}
+ *	 value={this.state.selectedCascadeData.map(f=>f.text).join(' -> ')}
+ *	 onKeyDown={event=>{
+ *		if (event.keyCode === 8) {
+ *			this.setState(
+ *				update(this.state,{
+ *					selectedCascadeData:{$set:this.state.selectedCascadeData.slice(0,this.state.selectedCascadeData.length-1)},
+ *					CascadePickerData:{$set:[...this.originalCascadePickerData]}
+ *				})
+ *			);
+ *		}
+ *	}}>
+ *	 <ul>
+ *	 {this.state.CascadePickerData.map((item, index)=> {
+ *		 return (
+ *			 <li
+ *				 key={index}
+ *				 onClick={()=>{
+ *					 let lastSelected;
+ *					 if(this.state.selectedCascadeData.length>0){
+ *						 lastSelected=this.state.selectedCascadeData[this.state.selectedCascadeData.length-1];
+ *					 }
+ *					 let newState=Object.assign({},this.state);
+ *					 if(!lastSelected || lastSelected.text!==item.text){
+ *						 newState=update(newState,{
+ *						 selectedCascadeData:{$push:[item]},
+ *					 });
+ *					 }
+ *					 if(item.children){
+ *						 newState=update(newState,{
+ *							 CascadePickerData:{$set:item.children}
+ *						 });
+ *					 }
+ *					 this.setState(newState);
+ *				 }}>{item.text}</li>
+ *		 );
+ *	 })}
+ *	 </ul>
+ *	 </DataPicker>
+ *
  * */
 var DataPicker = function (_BaseComponent) {
-	(0, _inherits3.default)(DataPicker, _BaseComponent);
+  (0, _inherits3.default)(DataPicker, _BaseComponent);
 
-	/**
-  * @property {Object} option
-  * @property {Object} option.filter
-  * @property {Boolean} option.filter.show [false]
-  * @property {Function} option.filter.onChange [()=>null]
-  * */
-	function DataPicker(props) {
-		(0, _classCallCheck3.default)(this, DataPicker);
+  function DataPicker(props) {
+    (0, _classCallCheck3.default)(this, DataPicker);
 
-		var _this = (0, _possibleConstructorReturn3.default)(this, (DataPicker.__proto__ || (0, _getPrototypeOf2.default)(DataPicker)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DataPicker.__proto__ || (0, _getPrototypeOf2.default)(DataPicker)).call(this, props));
 
-		_this.state = {};
-		return _this;
-	}
+    _this.state = {};
+    return _this;
+  }
 
-	/**
-  * @method
-  * get picker instance
-  * */
+  /**
+   * @method
+   * get picker instance
+   * */
 
 
-	(0, _createClass3.default)(DataPicker, [{
-		key: 'getPickerInstance',
-		value: function getPickerInstance() {
-			return this.refs['picker'];
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var inputProps = (0, _assign2.default)({}, this.props);
-			delete inputProps.option;
-			delete inputProps.children;
-			delete inputProps.onChange;
+  (0, _createClass3.default)(DataPicker, [{
+    key: 'getPickerInstance',
+    value: function getPickerInstance() {
+      return this.refs['picker'];
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var inputProps = (0, _assign2.default)({}, this.props);
+      delete inputProps.children;
 
-			var filterOption = {
-				show: false,
-				onChange: function onChange() {
-					return null;
-				}
-			};
-			if (this.props.option) {
-				if (this.props.option.filter) {
-					filterOption = (0, _assign2.default)(filterOption, this.props.option.filter);
-				}
-			}
-			return _react2.default.createElement(
-				_Picker2.default,
-				(0, _extends3.default)({ ref: 'picker' }, inputProps),
-				_react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'div',
-						{ style: { display: filterOption.show ? '' : 'none' } },
-						_react2.default.createElement('input', { type: 'text', placeholder: 'filter', onChange: filterOption.onChange })
-					),
-					_react2.default.createElement(
-						'div',
-						null,
-						_react2.default.Children.only(this.props.children)
-					)
-				)
-			);
-		}
-	}]);
-	return DataPicker;
+      return _react2.default.createElement(
+        _Picker2.default,
+        (0, _extends3.default)({ ref: 'picker' }, inputProps),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.Children.only(this.props.children)
+        )
+      );
+    }
+  }]);
+  return DataPicker;
 }(_BaseComponent3.default);
 
-DataPicker.propTypes = {
-	option: _propTypes2.default.shape({
-		filter: _propTypes2.default.shape({
-			show: _propTypes2.default.bool,
-			onChange: _propTypes2.default.func
-		})
-	})
-};
-DataPicker.defaultProps = {
-	option: {
-		filter: {
-			show: false,
-			onChange: function onChange() {
-				return null;
-			}
-		}
-	}
-};
 exports.default = DataPicker;
