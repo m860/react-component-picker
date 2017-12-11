@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
+    "test": "jest",
     "dev": "webpack-dev-server --host 0.0.0.0 --progress  --port 3000 --content-base src/",
     "build": "./build.sh",
     "publish": "npm publish --access public",
     "win-dev": "set NODE_ENV=development&&webpack-dev-server --host 0.0.0.0 --inline --progress --colors --port 3000 --content-base src/",
-    "win-build": "set NODE_ENV=production&&webpack --progress --profile --colors"
+    "win-build": "set NODE_ENV=production&&webpack --progress --profile --colors",
+    "coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.6.1",
     "clean-webpack-plugin": "^0.1.8",
+    "coveralls": "^3.0.0",
     "css-loader": "^0.23.1",
     "enzyme": "^2.9.1",
     "eslint": "^3.8.1",
@@ -49,17 +51,17 @@
     "jest-localstorage-mock": "^2.1.0",
     "node-sass": "^3.4.2",
     "postcss-loader": "^0.8.2",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
+    "react-dom": "^15.6.1",
     "react-test-renderer": "^16.2.0",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.7.1",
-    "yargs": "^8.0.2",
-    "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "yargs": "^8.0.2"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
@@ -72,6 +74,10 @@
     "react-trigger-change": "^1.0.2"
   },
   "jest": {
-    "setupFiles": ["jest-localstorage-mock"]
+    "verbose": true,
+    "collectCoverage": true,
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
   }
 }
