@@ -56,7 +56,10 @@
     "url-loader": "^0.5.7",
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.7.1",
-    "yargs": "^8.0.2"
+    "yargs": "^8.0.2",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
