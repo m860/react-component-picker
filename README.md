@@ -5,6 +5,7 @@
 [![npm license](https://img.shields.io/npm/l/react-component-picker.svg)](https://www.npmjs.com/package/react-component-picker)
 [![npm download](https://img.shields.io/npm/dm/react-component-picker.svg)](https://www.npmjs.com/package/react-component-picker)
 [![npm download](https://img.shields.io/npm/dt/react-component-picker.svg)](https://www.npmjs.com/package/react-component-picker)
+[![build passing](https://travis-ci.org/m860/react-component-picker.svg?branch=master)](https://www.npmjs.com/package/react-component-picker)
 <!-- endbadge -->
 
 [Documentation & Examples](./API.md)
