@@ -28,10 +28,6 @@ var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstru
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _get2 = require('babel-runtime/helpers/get');
-
-var _get3 = _interopRequireDefault(_get2);
-
 var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
@@ -63,8 +59,8 @@ var Picker = function (_BaseComponent) {
 		var _this = (0, _possibleConstructorReturn3.default)(this, (Picker.__proto__ || (0, _getPrototypeOf2.default)(Picker)).call(this, props));
 
 		_this.state = {
-			width: null,
-			height: null,
+			// width: null,
+			// height: null,
 			focus: false,
 			hover: false
 		};
@@ -92,13 +88,13 @@ var Picker = function (_BaseComponent) {
 		value: function render() {
 			var _this2 = this;
 
-			var pickerStyle = {};
-			if (this.state.width) {
-				pickerStyle.width = this.state.width;
-			}
-			if (this.state.height) {
-				pickerStyle.minHeight = this.state.height;
-			}
+			// let pickerStyle = {};
+			// if (this.state.width) {
+			// 	pickerStyle.width = this.state.width;
+			// }
+			// if (this.state.height) {
+			// 	pickerStyle.minHeight = this.state.height;
+			// }
 			var inputProps = (0, _assign2.default)({}, this.props, {
 				onFocus: function onFocus(event) {
 					_this2.props.onFocus && _this2.props.onFocus(event);
@@ -132,46 +128,31 @@ var Picker = function (_BaseComponent) {
 					onMouseEnter: function onMouseEnter() {
 						return _this2.updateState({ hover: { $set: true } });
 					},
-					className: 'react-component-picker',
-					style: pickerStyle },
+					className: 'react-component-picker ' + this.props.className,
+					style: this.props.style },
 				_react2.default.createElement(
 					'div',
-					{ className: 'react-component-picker-wrapper', style: { zIndex: visible ? 999 : 'auto' } },
-					_react2.default.createElement(
-						'div',
-						{ className: 'react-component-picker-input' },
-						_react2.default.createElement('input', (0, _extends3.default)({ ref: 'input' }, inputProps))
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'react-component-picker-data', style: { display: visible ? '' : 'none' } },
-						_react2.default.Children.only(this.props.children)
-					)
+					null,
+					_react2.default.createElement('input', (0, _extends3.default)({ ref: 'input' }, inputProps))
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'react-component-picker-data',
+						style: visible ? { display: '', zIndex: 999 } : { display: 'none' } },
+					_react2.default.Children.only(this.props.children)
 				)
 			);
-		}
-	}, {
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			(0, _get3.default)(Picker.prototype.__proto__ || (0, _getPrototypeOf2.default)(Picker.prototype), 'componentDidMount', this).call(this);
-			var input = this.refs.input;
-
-			if (input) {
-				var computedStyle = window.getComputedStyle(input);
-				var width = parseFloat(computedStyle.width);
-				var height = parseFloat(computedStyle.height);
-				var newState = {};
-				if (!isNaN(width)) {
-					newState.width = { $set: width };
-				}
-				if (!isNaN(height)) {
-					newState.height = { $set: height };
-				}
-				this.updateState(newState);
-			}
 		}
 	}]);
 	return Picker;
 }(_BaseComponent3.default);
 
+Picker.propTypes = {
+	className: _propTypes2.default.string,
+	style: _propTypes2.default.object
+};
+Picker.defaultProps = {
+	className: '',
+	style: {}
+};
 exports.default = Picker;

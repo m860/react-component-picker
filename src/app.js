@@ -41,52 +41,50 @@ class Example extends Component {
 			<div>
 				<form>
 					<div>
-						<label>Name</label>
-						<input/>
-					</div>
-					<div>
 						<label>HistoryTextInputPicker</label>
-						<HistoryTextInputPicker
-							name="abc"
-							value={this.state.HistoryTextInputPicker}
-							onChange={event=>{
-								this.setState(update(this.state,{HistoryTextInputPicker:{$set:event.target.value}}));
-							}}/>
+						<div>
+							<HistoryTextInputPicker
+								name="abc"
+								value={this.state.HistoryTextInputPicker}
+								onChange={event => {
+									this.setState(update(this.state, {HistoryTextInputPicker: {$set: event.target.value}}));
+								}}/>
+						</div>
 					</div>
 					<div>
 						<label>DataPicker</label>
 						<DataPicker
-							style={{width:200}}
-							value={this.state.selectedCascadeData.map(f=>f.text).join(' -> ')}
-							onKeyDown={event=>{
+							style={{width: 200}}
+							value={this.state.selectedCascadeData.map(f => f.text).join(' -> ')}
+							onKeyDown={event => {
 								if (event.keyCode === 8) {
 									this.setState(
-										update(this.state,{
-											selectedCascadeData:{$set:this.state.selectedCascadeData.slice(0,this.state.selectedCascadeData.length-1)},
-											CascadePickerData:{$set:[...this.originalCascadePickerData]}
+										update(this.state, {
+											selectedCascadeData: {$set: this.state.selectedCascadeData.slice(0, this.state.selectedCascadeData.length - 1)},
+											CascadePickerData: {$set: [...this.originalCascadePickerData]}
 										})
 									);
 								}
 							}}>
 							<ul>
-								{this.state.CascadePickerData.map((item, index)=> {
+								{this.state.CascadePickerData.map((item, index) => {
 									return (
 										<li
 											key={index}
-											onClick={()=>{
+											onClick={() => {
 												let lastSelected;
-												if(this.state.selectedCascadeData.length>0){
-													lastSelected=this.state.selectedCascadeData[this.state.selectedCascadeData.length-1];
+												if (this.state.selectedCascadeData.length > 0) {
+													lastSelected = this.state.selectedCascadeData[this.state.selectedCascadeData.length - 1];
 												}
-												let newState=Object.assign({},this.state);
-												if(!lastSelected || lastSelected.text!==item.text){
-													newState=update(newState,{
-													selectedCascadeData:{$push:[item]},
-												});
+												let newState = Object.assign({}, this.state);
+												if (!lastSelected || lastSelected.text !== item.text) {
+													newState = update(newState, {
+														selectedCascadeData: {$push: [item]},
+													});
 												}
-												if(item.children){
-													newState=update(newState,{
-														CascadePickerData:{$set:item.children}
+												if (item.children) {
+													newState = update(newState, {
+														CascadePickerData: {$set: item.children}
 													});
 												}
 												this.setState(newState);
@@ -95,10 +93,6 @@ class Example extends Component {
 								})}
 							</ul>
 						</DataPicker>
-					</div>
-					<div>
-						<label>Name</label>
-						<input/>
 					</div>
 				</form>
 				<span>{JSON.stringify(this.state)}</span>
